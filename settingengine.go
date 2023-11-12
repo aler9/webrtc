@@ -52,6 +52,7 @@ type SettingEngine struct {
 		IPFilter                 func(net.IP) (keep bool)
 		NAT1To1IPs               []string
 		NAT1To1IPCandidateType   ICECandidateType
+		AdditionalHosts          []string
 		MulticastDNSMode         ice.MulticastDNSMode
 		MulticastDNSHostName     string
 		UsernameFragment         string
@@ -249,6 +250,10 @@ func (e *SettingEngine) SetIPFilter(filter func(net.IP) (keep bool)) {
 func (e *SettingEngine) SetNAT1To1IPs(ips []string, candidateType ICECandidateType) {
 	e.candidates.NAT1To1IPs = ips
 	e.candidates.NAT1To1IPCandidateType = candidateType
+}
+
+func (e *SettingEngine) SetAdditionalHosts(hosts []string) {
+	e.candidates.AdditionalHosts = hosts
 }
 
 // SetIncludeLoopbackCandidate enable pion to gather loopback candidates, it is useful
