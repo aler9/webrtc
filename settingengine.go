@@ -50,6 +50,7 @@ type SettingEngine struct {
 		IPFilter                 func(net.IP) bool
 		NAT1To1IPs               []string
 		NAT1To1IPCandidateType   ICECandidateType
+		AdditionalHosts          []string
 		MulticastDNSMode         ice.MulticastDNSMode
 		MulticastDNSHostName     string
 		UsernameFragment         string
@@ -86,6 +87,7 @@ type SettingEngine struct {
 	LoggerFactory                             logging.LoggerFactory
 	iceTCPMux                                 ice.TCPMux
 	iceUDPMux                                 ice.UDPMux
+	iceUDPRandom                              bool
 	iceProxyDialer                            proxy.Dialer
 	iceDisableActiveTCP                       bool
 	disableMediaEngineCopy                    bool
@@ -227,6 +229,10 @@ func (e *SettingEngine) SetNAT1To1IPs(ips []string, candidateType ICECandidateTy
 	e.candidates.NAT1To1IPCandidateType = candidateType
 }
 
+func (e *SettingEngine) SetAdditionalHosts(hosts []string) {
+	e.candidates.AdditionalHosts = hosts
+}
+
 // SetIncludeLoopbackCandidate enable pion to gather loopback candidates, it is useful
 // for some VM have public IP mapped to loopback interface
 func (e *SettingEngine) SetIncludeLoopbackCandidate(include bool) {
@@ -343,6 +349,10 @@ func (e *SettingEngine) SetICETCPMux(tcpMux ice.TCPMux) {
 // UDPMux should be started prior to creating PeerConnections.
 func (e *SettingEngine) SetICEUDPMux(udpMux ice.UDPMux) {
 	e.iceUDPMux = udpMux
+}
+
+func (e *SettingEngine) SetICEUDPRandom(v bool) {
+	e.iceUDPRandom = v
 }
 
 // SetICEProxyDialer sets the proxy dialer interface based on golang.org/x/net/proxy.

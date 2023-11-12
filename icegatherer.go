@@ -112,6 +112,7 @@ func (g *ICEGatherer) createAgent() error {
 		IPFilter:               g.api.settingEngine.candidates.IPFilter,
 		NAT1To1IPs:             g.api.settingEngine.candidates.NAT1To1IPs,
 		NAT1To1IPCandidateType: nat1To1CandiTyp,
+		AdditionalHosts:        g.api.settingEngine.candidates.AdditionalHosts,
 		IncludeLoopback:        g.api.settingEngine.candidates.IncludeLoopbackCandidate,
 		Net:                    g.api.settingEngine.net,
 		MulticastDNSMode:       mDNSMode,
@@ -120,6 +121,7 @@ func (g *ICEGatherer) createAgent() error {
 		LocalPwd:               g.api.settingEngine.candidates.Password,
 		TCPMux:                 g.api.settingEngine.iceTCPMux,
 		UDPMux:                 g.api.settingEngine.iceUDPMux,
+		UDPRandom:              g.api.settingEngine.iceUDPRandom,
 		ProxyDialer:            g.api.settingEngine.iceProxyDialer,
 		DisableActiveTCP:       g.api.settingEngine.iceDisableActiveTCP,
 	}
