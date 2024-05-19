@@ -73,19 +73,19 @@ func main() {
 	outputTracks := map[string]*webrtc.TrackLocalStaticRTP{}
 
 	// Create Track that we send video back to browser on
-	outputTrack, err := webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8}, "video_q", "pion_q")
+	outputTrack, err := webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8, ClockRate: 90000}, "video_q", "pion_q")
 	if err != nil {
 		panic(err)
 	}
 	outputTracks["q"] = outputTrack
 
-	outputTrack, err = webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8}, "video_h", "pion_h")
+	outputTrack, err = webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8, ClockRate: 90000}, "video_h", "pion_h")
 	if err != nil {
 		panic(err)
 	}
 	outputTracks["h"] = outputTrack
 
-	outputTrack, err = webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8}, "video_f", "pion_f")
+	outputTrack, err = webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8, ClockRate: 90000}, "video_f", "pion_f")
 	if err != nil {
 		panic(err)
 	}

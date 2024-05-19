@@ -24,6 +24,16 @@ func parseParameters(line string) map[string]string {
 	return parameters
 }
 
+func channelsEqual(a, b uint16) bool {
+	if a == 0 {
+		a = 1
+	}
+	if b == 0 {
+		b = 1
+	}
+	return a == b
+}
+
 // FMTP interface for implementing custom
 // FMTP parsers based on MimeType
 type FMTP interface {
@@ -39,7 +49,7 @@ type FMTP interface {
 }
 
 // Parse parses an fmtp string based on the MimeType
-func Parse(mimeType, line string) FMTP {
+func Parse(mimeType string, clockRate uint32, channels uint16, line string) FMTP {
 	var f FMTP
 
 	parameters := parseParameters(line)
@@ -63,6 +73,8 @@ func Parse(mimeType, line string) FMTP {
 	default:
 		f = &genericFMTP{
 			mimeType:   mimeType,
+			clockRate:  clockRate,
+			channels:   channels,
 			parameters: parameters,
 		}
 	}
@@ -72,6 +84,8 @@ func Parse(mimeType, line string) FMTP {
 
 type genericFMTP struct {
 	mimeType   string
+	clockRate  uint32
+	channels   uint16
 	parameters map[string]string
 }
 
@@ -88,6 +102,14 @@ func (g *genericFMTP) Match(b FMTP) bool {
 	}
 
 	if !strings.EqualFold(g.mimeType, c.MimeType()) {
+		return false
+	}
+
+	if g.clockRate != c.clockRate {
+		return false
+	}
+
+	if !channelsEqual(g.channels, c.channels) {
 		return false
 	}
 
