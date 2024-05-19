@@ -49,6 +49,16 @@ const (
 	MimeTypePCMA = "audio/PCMA"
 )
 
+func channelsEqual(a, b uint16) bool {
+	if a == 0 {
+		a = 1
+	}
+	if b == 0 {
+		b = 1
+	}
+	return a == b
+}
+
 type mediaEngineHeaderExtension struct {
 	uri              string
 	isAudio, isVideo bool
@@ -211,7 +221,10 @@ func (m *MediaEngine) RegisterDefaultCodecs() error {
 // addCodec will append codec if it not exists
 func (m *MediaEngine) addCodec(codecs []RTPCodecParameters, codec RTPCodecParameters) []RTPCodecParameters {
 	for _, c := range codecs {
-		if c.MimeType == codec.MimeType && c.PayloadType == codec.PayloadType {
+		if c.MimeType == codec.MimeType &&
+			c.ClockRate == codec.ClockRate &&
+			channelsEqual(c.Channels, codec.Channels) &&
+			c.PayloadType == codec.PayloadType {
 			return codecs
 		}
 	}
@@ -407,7 +420,12 @@ func (m *MediaEngine) matchRemoteCodec(remoteCodec RTPCodecParameters, typ RTPCo
 		codecs = m.audioCodecs
 	}
 
-	remoteFmtp := fmtp.Parse(remoteCodec.RTPCodecCapability.MimeType, remoteCodec.RTPCodecCapability.SDPFmtpLine)
+	remoteFmtp := fmtp.Parse(
+		remoteCodec.RTPCodecCapability.MimeType,
+		remoteCodec.RTPCodecCapability.ClockRate,
+		remoteCodec.RTPCodecCapability.Channels,
+		remoteCodec.RTPCodecCapability.SDPFmtpLine)
+
 	if apt, hasApt := remoteFmtp.Parameter("apt"); hasApt {
 		payloadType, err := strconv.ParseUint(apt, 10, 8)
 		if err != nil {

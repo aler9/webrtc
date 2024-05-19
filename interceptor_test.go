@@ -73,7 +73,7 @@ func TestPeerConnection_Interceptor(t *testing.T) {
 	offerer := createPC()
 	answerer := createPC()
 
-	track, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeVP8}, "video", "pion")
+	track, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeVP8, ClockRate: 90000}, "video", "pion")
 	assert.NoError(t, err)
 
 	_, err = offerer.AddTrack(track)
@@ -163,7 +163,7 @@ func Test_Interceptor_BindUnbind(t *testing.T) {
 	sender, receiver, err := NewAPI(WithMediaEngine(m), WithInterceptorRegistry(ir)).newPair(Configuration{})
 	assert.NoError(t, err)
 
-	track, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeVP8}, "video", "pion")
+	track, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeVP8, ClockRate: 90000}, "video", "pion")
 	assert.NoError(t, err)
 
 	_, err = sender.AddTrack(track)

@@ -43,7 +43,7 @@ func main() { // nolint:gocognit
 	}()
 
 	// Create Track that we send video back to browser on
-	outputTrack, err := webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8}, "video", "pion")
+	outputTrack, err := webrtc.NewTrackLocalStaticRTP(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8, ClockRate: 90000}, "video", "pion")
 	if err != nil {
 		panic(err)
 	}

@@ -194,25 +194,25 @@ func TestSDPSemantics_PlanBAnswerSenders(t *testing.T) {
 	})
 	assert.NoError(t, err)
 
-	video1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "1", "1")
+	video1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, ClockRate: 90000, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "1", "1")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(video1)
 	assert.NoError(t, err)
 
-	video2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "2", "2")
+	video2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, ClockRate: 90000, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "2", "2")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(video2)
 	assert.NoError(t, err)
 
-	audio1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus}, "3", "3")
+	audio1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus, ClockRate: 48000, Channels: 2}, "3", "3")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(audio1)
 	assert.NoError(t, err)
 
-	audio2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus}, "4", "4")
+	audio2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus, ClockRate: 48000, Channels: 2}, "4", "4")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(audio2)
@@ -269,25 +269,25 @@ func TestSDPSemantics_UnifiedPlanWithFallback(t *testing.T) {
 	})
 	assert.NoError(t, err)
 
-	video1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "1", "1")
+	video1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, ClockRate: 90000, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "1", "1")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(video1)
 	assert.NoError(t, err)
 
-	video2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "2", "2")
+	video2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeH264, ClockRate: 90000, SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f"}, "2", "2")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(video2)
 	assert.NoError(t, err)
 
-	audio1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus}, "3", "3")
+	audio1, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus, ClockRate: 48000, Channels: 2}, "3", "3")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(audio1)
 	assert.NoError(t, err)
 
-	audio2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus}, "4", "4")
+	audio2, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeOpus, ClockRate: 48000, Channels: 2}, "4", "4")
 	assert.NoError(t, err)
 
 	_, err = apc.AddTrack(audio2)

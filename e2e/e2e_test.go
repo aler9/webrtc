@@ -337,7 +337,7 @@ func createTrack(offer webrtc.SessionDescription) (*webrtc.PeerConnection, *webr
 		return nil, nil, nil, errPc
 	}
 
-	track, errTrack := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeOpus}, "audio", "pion")
+	track, errTrack := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeOpus, ClockRate: 48000, Channels: 2}, "audio", "pion")
 	if errTrack != nil {
 		return nil, nil, nil, errTrack
 	}

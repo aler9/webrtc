@@ -74,7 +74,7 @@ func createPeerConnection(w http.ResponseWriter, r *http.Request) {
 // Add a single video track
 func addVideo(w http.ResponseWriter, r *http.Request) {
 	videoTrack, err := webrtc.NewTrackLocalStaticSample(
-		webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8},
+		webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeVP8, ClockRate: 90000},
 		fmt.Sprintf("video-%d", randutil.NewMathRandomGenerator().Uint32()),
 		fmt.Sprintf("video-%d", randutil.NewMathRandomGenerator().Uint32()),
 	)
