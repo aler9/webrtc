@@ -1024,7 +1024,7 @@ type trackRecords struct {
 
 func (r *trackRecords) newTrack() (*TrackLocalStaticRTP, error) {
 	trackID := fmt.Sprintf("pion-track-%d", len(r.trackIDs))
-	track, err := NewTrackLocalStaticRTP(RTPCodecCapability{MimeType: MimeTypeVP8}, trackID, "pion")
+	track, err := NewTrackLocalStaticRTP(RTPCodecCapability{MimeType: MimeTypeVP8, ClockRate: 90000}, trackID, "pion")
 	r.trackIDs[trackID] = struct{}{}
 	return track, err
 }

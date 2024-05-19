@@ -85,7 +85,7 @@ func main() {
 		}
 
 		// Create a video track
-		videoTrack, videoTrackErr := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: trackCodec}, "video", "pion")
+		videoTrack, videoTrackErr := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: trackCodec, ClockRate: 90000}, "video", "pion")
 		if videoTrackErr != nil {
 			panic(videoTrackErr)
 		}
@@ -149,7 +149,7 @@ func main() {
 
 	if haveAudioFile {
 		// Create a audio track
-		audioTrack, audioTrackErr := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeOpus}, "audio", "pion")
+		audioTrack, audioTrackErr := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: webrtc.MimeTypeOpus, ClockRate: 48000, Channels: 2}, "audio", "pion")
 		if audioTrackErr != nil {
 			panic(audioTrackErr)
 		}
