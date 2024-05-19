@@ -19,7 +19,7 @@ import (
 func TestSetRTPParameters(t *testing.T) {
 	sender, receiver, wan := createVNetPair(t, nil)
 
-	outgoingTrack, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeVP8}, "video", "pion")
+	outgoingTrack, err := NewTrackLocalStaticSample(RTPCodecCapability{MimeType: MimeTypeVP8, ClockRate: 90000}, "video", "pion")
 	assert.NoError(t, err)
 
 	_, err = sender.AddTrack(outgoingTrack)
