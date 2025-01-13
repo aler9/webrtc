@@ -113,6 +113,7 @@ func (g *ICEGatherer) createAgent() error {
 		IPFilter:               g.api.settingEngine.candidates.IPFilter,
 		NAT1To1IPs:             g.api.settingEngine.candidates.NAT1To1IPs,
 		NAT1To1IPCandidateType: nat1To1CandiTyp,
+		AdditionalHosts:        g.api.settingEngine.candidates.AdditionalHosts,
 		IncludeLoopback:        g.api.settingEngine.candidates.IncludeLoopbackCandidate,
 		Net:                    g.api.settingEngine.net,
 		MulticastDNSMode:       mDNSMode,
