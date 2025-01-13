@@ -114,6 +114,7 @@ func (g *ICEGatherer) createAgent() error {
 		NAT1To1IPs:             g.api.settingEngine.candidates.NAT1To1IPs,
 		NAT1To1IPCandidateType: nat1To1CandiTyp,
 		AdditionalHosts:        g.api.settingEngine.candidates.AdditionalHosts,
+		LocalRandomUDP:         g.api.settingEngine.candidates.LocalRandomUDP,
 		IncludeLoopback:        g.api.settingEngine.candidates.IncludeLoopbackCandidate,
 		Net:                    g.api.settingEngine.net,
 		MulticastDNSMode:       mDNSMode,

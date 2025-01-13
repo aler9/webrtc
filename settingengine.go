@@ -53,6 +53,7 @@ type SettingEngine struct {
 		NAT1To1IPs               []string
 		NAT1To1IPCandidateType   ICECandidateType
 		AdditionalHosts          []string
+		LocalRandomUDP           bool
 		MulticastDNSMode         ice.MulticastDNSMode
 		MulticastDNSHostName     string
 		UsernameFragment         string
@@ -254,6 +255,10 @@ func (e *SettingEngine) SetNAT1To1IPs(ips []string, candidateType ICECandidateTy
 
 func (e *SettingEngine) SetAdditionalHosts(hosts []string) {
 	e.candidates.AdditionalHosts = hosts
+}
+
+func (e *SettingEngine) SetLocalRandomUDP(v bool) {
+	e.candidates.LocalRandomUDP = v
 }
 
 // SetIncludeLoopbackCandidate enable pion to gather loopback candidates, it is useful
